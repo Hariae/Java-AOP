@@ -16,17 +16,26 @@ public class App {
         SecretStats stats = (SecretStats) ctx.getBean("secretStats");
 
         try {
-			/*
-			 * UUID secret = secretService.createSecret("Alice", "My little secret");
-			 * 
-			 * secretService.shareSecret("Alice",secret, "Bob");
-			 * secretService.shareSecret("Alice",secret, "Carl");
-			 * secretService.shareSecret("Bob",secret, "Carl");
-			 * secretService.readSecret("Bob", secret); secretService.readSecret("Carl",
-			 * secret); secretService.unshareSecret("Alice", secret, "Carl");
-			 */
+			
+			
+			  UUID secret = secretService.createSecret("Alice", "My little secret");
+			  UUID secret1 = secretService.createSecret("Alice", "My little secret1");
+			  
+			  secretService.shareSecret("Alice",secret, "Bob");
+			  secretService.shareSecret("Alice",secret1, "Bob");
+			  secretService.shareSecret("Bob",secret, "Alex");
+			  secretService.shareSecret("Bob",secret, "Jim");
+			  secretService.readSecret("Bob", secret);
+			  secretService.readSecret("Jim", secret);
+			  secretService.readSecret("Bob", secret1);
+			  secretService.unshareSecret("Alice",
+			  secret, "Bob");
+			 
+			 
 			
 			/*Use case*/
+			
+			
 			
 			/*
 			 * UUID secret = secretService.createSecret("Alice", "My little secret");
@@ -49,17 +58,20 @@ public class App {
 			 * secretService.readSecret("Ed", secret);secretService.readSecret("Jones",
 			 * secret);
 			 */
-			
+			  
+			 
         	/*Use case 2*/
         	
-        	UUID secret = secretService.createSecret("Alice", "My little secret");
-        	UUID secret1 = secretService.createSecret("Alice", "My little secret");
-        	
-        	secretService.shareSecret("Alice",secret, "Bob");
-        	secretService.shareSecret("Alice",secret1, "Bob");
-        	secretService.shareSecret("Bob",secret, "Saumya");
-        	secretService.shareSecret("Saumya",secret, "Bob");
-        	secretService.shareSecret("Bob",secret, "Bob");
+			/*
+			 * UUID secret = secretService.createSecret("Alice", "My little secret"); UUID
+			 * secret1 = secretService.createSecret("Alice", "My little secret");
+			 * 
+			 * secretService.shareSecret("Alice",secret, "Bob");
+			 * secretService.shareSecret("Alice",secret1, "Bob");
+			 * secretService.shareSecret("Bob",secret, "Saumya");
+			 * secretService.shareSecret("Saumya",secret, "Bob");
+			 * secretService.shareSecret("Bob",secret, "Bob");
+			 */
         	
 			
 			System.out.println("Longest " + stats.getLengthOfLongestSecret());
@@ -71,6 +83,7 @@ public class App {
         System.out.println("Best known secret: " + stats.getBestKnownSecret());
         System.out.println("Worst secret keeper: " + stats.getWorstSecretKeeper());
         System.out.println("Most trusted user: " + stats.getMostTrustedUser());
+        stats.resetStatsAndSystem();
         ctx.close();
     }
 }

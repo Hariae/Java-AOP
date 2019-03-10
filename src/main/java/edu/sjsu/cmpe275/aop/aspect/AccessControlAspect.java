@@ -7,15 +7,16 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 
 import edu.sjsu.cmpe275.aop.NotAuthorizedException;
-import edu.sjsu.cmpe275.aop.Secret;
-//import edu.sjsu.cmpe275.aop.SecretServiceImpl;
+import edu.sjsu.cmpe275.aop.SecretStatsImpl;
+import edu.sjsu.cmpe275.aop.aspect.StatsAspect;
 
 
 @Aspect
-@Order(1)
+@Order(2)
 public class AccessControlAspect {
     /***
      * Following is a dummy implementation of this aspect.
@@ -32,8 +33,8 @@ public class AccessControlAspect {
 	 * }
 	 */
 	
-	Map<UUID, List<String>> userSecrets = new HashMap<UUID, List<String>>();
-	Map<UUID, String> secretCreators = new HashMap<UUID, String>();
+	public Map<UUID, List<String>> userSecrets = new HashMap<UUID, List<String>>();
+	public Map<UUID, String> secretCreators = new HashMap<UUID, String>();
 
 	
 	@Before("execution(public edu.sjsu.cmpe275.aop.Secret edu.sjsu.cmpe275.aop.SecretService.*(..))")
@@ -98,11 +99,15 @@ public class AccessControlAspect {
 	
 	@AfterReturning("execution(public void edu.sjsu.cmpe275.aop.SecretService.unshareSecret(..))")
 	public void unshareSecretAfterAdvice(JoinPoint joinPoint) {
-		System.out.printf("Access control prior to the executuion of the method %s\n", joinPoint.getSignature().getName());
+		System.out.printf("Access control after the executuion of the method %s\n", joinPoint.getSignature().getName());
 		Object[] obj = joinPoint.getArgs();
 		List<String> secretUsers = userSecrets.get((UUID)obj[1]);
 		secretUsers.remove(obj[2].toString());
 	}
+	
+	 
+	
+	
 	
 
 }

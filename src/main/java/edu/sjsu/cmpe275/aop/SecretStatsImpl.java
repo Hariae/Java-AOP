@@ -1,6 +1,10 @@
 package edu.sjsu.cmpe275.aop;
 
 import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import edu.sjsu.cmpe275.aop.aspect.AccessControlAspect;
+
 
 public class SecretStatsImpl implements SecretStats {
     /***
@@ -11,23 +15,26 @@ public class SecretStatsImpl implements SecretStats {
 	//to calculate length of secrets
 	public Set<String> secrets = new HashSet<String>();	
 	//To track reciever, List of (sharerId+secretId)
-	public Map<String, List<String>> secretRecieverTracker = new HashMap<String, List<String>>();
+	public Map<String, List<String>> secretRecieverTracker = new TreeMap<String, List<String>>();
 	//To track sharer, number of shares made
 	public Map<String, List<String>> secretSharerTracker = new HashMap<String, List<String>>();
 	//To track number of unique reads for a secret
-	public Map<String, List<String>> secretReadTracker = new HashMap<String, List<String>>();
+	public Map<String, List<String>> secretReadTracker = new TreeMap<String, List<String>>();
 	// To track secret and owers
 	public Map<String, String> secretOwners = new HashMap<String, String>();
 	
+	@Autowired AccessControlAspect accessControl;
 
 	//@Override
 	public void resetStatsAndSystem() {
 		// TODO Auto-generated method stub
 		secrets = new HashSet<String>();
-		secretRecieverTracker = new HashMap<String, List<String>>();
+		secretRecieverTracker = new TreeMap<String, List<String>>();
 		secretSharerTracker = new HashMap<String, List<String>>();
-		secretReadTracker = new HashMap<String, List<String>>();
+		secretReadTracker = new TreeMap<String, List<String>>();
 		secretOwners = new HashMap<String, String>();	
+		accessControl.userSecrets = new HashMap<UUID, List<String>>();
+		accessControl.secretCreators = new HashMap<UUID, String>();
 	}
 
 	//@Override
@@ -60,7 +67,7 @@ public class SecretStatsImpl implements SecretStats {
 	//@Override
 	public String getWorstSecretKeeper() {
 		// TODO Auto-generated method stub
-		HashMap<String, Integer> secretKeeperStat = new HashMap<String, Integer>();
+		Map<String, Integer> secretKeeperStat = new TreeMap<String, Integer>();
 		
 		System.out.println("secretSharerTracker: " + secretSharerTracker);
 		

@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SecretServiceImpl implements SecretService {
 
 	/***

@@ -19,6 +19,7 @@ public class ValidationAspect {
 		System.out.printf("Doing validation prior to the executuion of the metohd %s\n",
 				joinPoint.getSignature().getName());
 		Object[] obj  = joinPoint.getArgs();
+		System.out.println("Objects: " + obj);
 		for(int i=0;i<obj.length;i++) {
 			if(obj[i] == null) {
 				throw new IllegalArgumentException();
