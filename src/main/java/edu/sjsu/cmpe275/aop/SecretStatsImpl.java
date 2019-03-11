@@ -33,8 +33,8 @@ public class SecretStatsImpl implements SecretStats {
 		secretSharerTracker = new HashMap<String, List<String>>();
 		secretReadTracker = new TreeMap<String, List<String>>();
 		secretOwners = new HashMap<String, String>();	
-		accessControl.userSecrets = new HashMap<UUID, List<String>>();
 		accessControl.secretCreators = new HashMap<UUID, String>();
+		accessControl.userSecrets = new HashMap<UUID, List<String>>();
 	}
 
 	//@Override

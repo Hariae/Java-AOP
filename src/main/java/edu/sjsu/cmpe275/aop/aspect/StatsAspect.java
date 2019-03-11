@@ -3,10 +3,8 @@ package edu.sjsu.cmpe275.aop.aspect;
 import java.util.*;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 
@@ -24,6 +22,7 @@ public class StatsAspect {
 
 	@Autowired
 	SecretStatsImpl secretStats;
+	
 
 
 
@@ -127,5 +126,6 @@ public class StatsAspect {
 
 		}
 	}
+	
 
 }

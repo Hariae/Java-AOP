@@ -24,6 +24,7 @@ public class SecretServiceImpl implements SecretService {
 		System.out.printf("User %s creates secret: %s\n", userId, secretContent);
 		Secret secret = new Secret(secretContent);
 		UUID id = secret.getId();
+		
 		secrets.put(id, secret);
 		return id;
 	}

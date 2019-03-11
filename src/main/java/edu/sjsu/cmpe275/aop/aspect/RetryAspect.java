@@ -27,19 +27,19 @@ public class RetryAspect {
 		try {
 			result = joinPoint.proceed();
 			System.out.printf("Finished the executuion of the metohd %s with result %s\n", joinPoint.getSignature().getName(), result);
-		} catch (Throwable e) {
-			e.printStackTrace();
+		} catch (IOException e) {
+			//e.printStackTrace();
 			try {
 				result = joinPoint.proceed();
 				System.out.printf("Finished the executuion of the metohd %s with result %s\n", joinPoint.getSignature().getName(), result);
 			}
-			catch(Throwable exception) {
-				exception.printStackTrace();
+			catch(IOException exception) {
+				//exception.printStackTrace();
 				try {
 					result = joinPoint.proceed();
 					System.out.printf("Finished the executuion of the metohd %s with result %s\n", joinPoint.getSignature().getName(), result);
 				}
-				catch(Throwable subexception) {
+				catch(IOException subexception) {
 					subexception.printStackTrace();
 					System.out.printf("Aborted the executuion of the metohd %s\n", joinPoint.getSignature().getName());
 					throw subexception;
@@ -58,19 +58,19 @@ public class RetryAspect {
 			try {
 				result = joinPoint.proceed();
 				System.out.printf("Finished the executuion of the metohd %s with result %s\n", joinPoint.getSignature().getName(), result);
-			} catch (Throwable e) {
-				e.printStackTrace();
+			} catch (IOException e) {
+				//e.printStackTrace();
 				try {
 					result = joinPoint.proceed();
 					System.out.printf("Finished the executuion of the metohd %s with result %s\n", joinPoint.getSignature().getName(), result);
 				}
-				catch(Throwable exception) {
-					exception.printStackTrace();
+				catch(IOException exception) {
+					//exception.printStackTrace();
 					try {
 						result = joinPoint.proceed();
 						System.out.printf("Finished the executuion of the metohd %s with result %s\n", joinPoint.getSignature().getName(), result);
 					}
-					catch(Throwable subexception) {
+					catch(IOException subexception) {
 						subexception.printStackTrace();
 						System.out.printf("Aborted the executuion of the metohd %s\n", joinPoint.getSignature().getName());
 						throw subexception;
@@ -91,20 +91,20 @@ public class RetryAspect {
 				result = joinPoint.proceed();
 				System.out.printf("Finished the executuion of the metohd %s with result %s\n", joinPoint.getSignature().getName(), result);
 				
-			} catch (Throwable e) {
-				e.printStackTrace();
+			} catch (IOException e) {
+				//e.printStackTrace();
 				try {
 					result = joinPoint.proceed();
 					System.out.printf("Finished the executuion of the metohd %s with result %s\n", joinPoint.getSignature().getName(), result);
 				}
-				catch(Throwable exception) {
-					exception.printStackTrace();
+				catch(IOException exception) {
+					//exception.printStackTrace();
 					try {
 						result = joinPoint.proceed();
 						System.out.printf("Finished the executuion of the metohd %s with result %s\n", joinPoint.getSignature().getName(), result);
 					}
-					catch(Throwable subexception) {
-						subexception.printStackTrace();
+					catch(IOException subexception) {
+						//subexception.printStackTrace();
 						System.out.printf("Aborted the executuion of the metohd %s\n", joinPoint.getSignature().getName());
 						throw subexception;
 					}
